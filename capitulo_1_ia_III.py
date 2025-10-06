@@ -1,32 +1,20 @@
-mapa_robo ={
+mapa_robo =[
 
     [0,0,0],
     [0,1,0],
     [0,0,0]
-}
-posicao_robo = [1,1] # linha, coluna
+]
+posicao_robo = [1,1] #posição inicial
 # 0 = sujo
 # 1 = limpo
-def mover_robo(direcao):
+def mover_robo():
     for i in range(len(mapa_robo)):
         for j in range(len(mapa_robo[i])):
-            if mapa_robo[i][j] == 0:
-                if direcao == mapa_robo[i-1][j] and i > 0:
-                    posicao_robo[0] -= 1
-                    mapa_robo[i][j] = 1
-                elif direcao == mapa_robo[i+1][j] and i < len(mapa_robo)-1:
-                    posicao_robo[0] += 1
-                    mapa_robo[i][j] = 1
-                elif direcao == mapa_robo[i][j-1] and j > 0:
-                    posicao_robo[1] -= 1
-                    mapa_robo[i][j] = 1
-                elif direcao == mapa_robo[i][j+1] and j > len(mapa_robo[i])-1:
-                    posicao_robo[1] -= 1
-                    mapa_robo[i][j] = 1
-                else:
-                    print("Movimento inválido")
-    return posicao_robo
-
-print(mover_robo(0))
-print(posicao_robo)
-print(mapa_robo)
+          if mapa_robo[i][j] == 0:
+            mapa_robo[i][j] = 1
+            
+            
+mover_robo()
+posicao_robo
+for linha in mapa_robo:
+    print(linha)

@@ -1,0 +1,90 @@
+Capítulo 3 - Agentes baseados em conhecimento
+
+
+Projete uma Base de Conhecimento simples em Lógica de Primeira Ordem para o agente “Orquestrador” com regras sobre as capacidades dos outros agentes. Inclua predicados como EspecialistaEm(agente, tópico) e PodeSintetizar(agente).
+
+
+	1- EspecialistaEm (AgenteA, VisãoComputacional) 
+	2- EspecialistaEm (AgenteB, Planeamento)
+	3- EspecialistaEm(AgenteC, LinguagemNatural)
+	4- PodeSintetizar (Osqiestrador)
+
+
+	Por exemplo, no tópico 1 indica que o agenteA é especialista em determinado topico neste caso é especialista em Visão Computacional.
+
+  
+O orquestrador coordena o sistema consultando os agentes especialistas em cada dominio e sintetizando as respostas para tomar decisões globais.
+	
+
+
+ Crie uma regra SE-ENTÃO para o “Orquestrador” que decida quando usar um agente “VerificadorDeFactos”. A condição pode depender do tipo de fonte da informação (e.g., “fonte_é_wikipedia”).
+
+Se a informação pesquisada for aberta ou potencialmente não confiavel então é chamado o agente de VerificadorDeFactos para o orquestrador ter mais precisão e fiabilidade
+
+
+ Utilize a representação de Frames para modelar um “Agente de Software” no vosso sistema. Crie um frame genérico e depois frames específicos para “AgenteInvestigador” e “AgenteEscritor”, mostrando a herança de slots.
+
+Frame Agente de Software:
+
+nome [texto]
+tipo [investigador,escritor]
+objetivo [texto]
+estado [ativo/inativo]
+comunica_com: [agentes]
+metodo_executar(): realiza a tarefa principal do agente
+Frame AgenteInvestigador:
+Herda-de: Agente de Software:
+
+fontes_de_pesquisa: [Google,Base de dados,Wikipedia]
+metodo_executar(): procurar informação credível
+validar_fontes(): verificar se a fonte é confiavel
+
+Frame AgenteEscritor:
+Herda-de: Agente de Software:
+
+estilo_de_escrita: [criativo,formal,tecnico]
+metodo_executar(): redigir texto com base nos dados fornecidos
+revisa_texto(): rever, corrigir e melhorar o texto
+
+
+
+
+
+Como poderia uma Rede Semântica ser usada para representar as relações entre os tópicos de investigação que o “CogniVerse” processa, ajudando o sistema a sugerir tópicos relacionados?
+
+	Uma rede semântica pode representar o conhecimento do CogniVerse como um grafo:
+
+Os nós representam tópicos de investigação (ex: IA, Machine Learning).
+Já as arestas vão representar relações semânticas entre nós (ex: “é a subárea de”).
+
+	Ou seja, quando o sistema processar um tópico ele pode navegar pelos nós conectados para identificar e automáticamente sugerir tópicos relacionados, com base em relações semânticas que existem.
+
+
+O vosso sistema precisa de decidir se uma fonte de informação é fiável. Proponha 3 regras para um sistema pericial simples que tome esta decisão, com base em atributos como autor_conhecido publicação_revisada_por_pares, e data_publicação.
+
+Se o autor_conhecido = true e publicação_revisada_por_pares = true então fonte_fiável.
+Se publicação_revisada_por_pares = false e data_publicação > 5 anos então fonte_pouco_fiável.
+Se o autor_conhecido = false e publicação_revisada_por_pares= false então fonte_não_fiável.
+
+
+O agente “Orquestrador” recebe um novo pedido: “Criar um resumo sobre IA em medicina”. Descreva como o ciclo TELL e ASK seria usado para interagir com a sua base de conhecimento e iniciar a tarefa.
+
+TELL -> o orquestrador utiliza a base de conhecimento com a nova informação recebida
+
+ASK -> O orquestrador consulta a base de conhecimento para decidir quais agentes podem realizar a tarefa
+
+
+Resposta da base:
+
+AgenteInvestigador -> recolhe informação
+AgenteEscritor -> escreve o resumo
+
+
+
+Discuta a vantagem de usar uma representação de conhecimento explícita (como regras ou frames) para o “Orquestrador”, em vez de ter a sua lógica de decisão “hard-coded” em Python.
+
+	
+Facilidade de atualização: Podem ser feitas novas regras ou alterar políticas sem alteração do código fonte.
+Transparência: Lógica de decisão mais clara e compreensível, facilitando a revisão e explicação de decisões.
+Flexibilidade: Permite integrar novos agentes sem reescrever funções complexas.
+Raciocínio automático: O sistema pode perceber novas conclusões a partir de regras existentes, algo difícil de acontecer com código fixo.

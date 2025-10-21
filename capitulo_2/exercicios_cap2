@@ -1,0 +1,74 @@
+Capítulo 2: Agentes de Procura
+
+
+1. O agente “Orquestrador” do “CogniVerse” precisa de selecionar a melhor sequência de agentes (Investigador -> Analista -> Escritor) para uma tarefa. Formule este problema como um problema de procura. Qual seria o espaço de estados e como poderia ser definido o custo do caminho? 
+	Exemplos de estados possíveis:
+●	Estado inicial : nenhum agente usado
+●	Estado 1: Investigador
+●	Estado 2: Investigador -> Analista
+●	Estado 3: Investigador -> Analista -> Escritor
+●	Estado final: Investigador -> Analista -> Escritor
+
+O custo do caminho pode representar o tempo, energia, preço de cada agente ou também recursos computacionais utilizados por cada agente.
+
+			Ctotal = C investigador + C analista + C escritor 
+  
+O agente “Orquestrador” fica responsável por procurar a sequencia com menor custo e melhor resultado.
+Exemplo: Vamos imaginar que o custo do investigador é 5, o analista é 2 e o escritor é 3, o ctotal será então 10.
+
+
+2. Suponha que o “Orquestrador” tem de escolher um de vários agentes “Investigadores” disponíveis, cada um com um custo de utilização e uma especialização. Modele este problema de seleção como uma procura A*, definindo uma função de custo g(n) e uma função heurística h(n) adequadas. 
+
+Função de custo:
+●	g(n) = custo acumulado até ao estado n 
+●	Para a seleção do investigador:
+
+				g(n) = custo de utilização do investigador escolhido
+
+ 
+Função heuristica:
+●	h(n) = estimativa de custo restante para completar a tarefa
+●	Pode ser definida como:
+
+h(n) = menor custo possivel dos agentes ainda não escolhidos 
+
+Função de avaliação f(n)
+●	No A*, cada estado é avaliado por:
+
+f (n)= g(n) + h(n)
+●	O algoritmo expande primeiro os estados com menor f(n), garantindo encontrar a sequência de agentes com menor custo total e adequada à especialização.
+
+Exemplo:
+●	Investigador 1 = custo 5
+●	Investigador 2 = custo 3 
+●	Investigador 3 = custo 4 
+●	Analista mais barato = custo 2, Escritor mais barato = custo 2 
+Caso se escolha o investigador 2:
+●	g(n) = 3 
+●	h(n) = 2 + 2 = 4
+●	f(n) = g(n) + h(n) = 7
+
+O A* vai comparar todos os caminhos e vai selecionar aquele que tiver menor f(n).
+
+
+3. No contexto do RAG, o agente “Investigador” precisa de encontrar os documentos mais relevantes numa base de dados vetorial. Embora não seja uma procura em grafo clássica, como é que os conceitos de “estado” e “vizinhança” se aplicam aqui?
+	Quando falamos no “RAG”, quando falamos em “estado” podemos ver o estado como o conjunto atual de documentos recuperados. Já a “vizinhança”, corresponde aos documentos mais perto no espaço vetorial.
+ 
+
+4. Se a vossa equipa de agentes pudesse ser configurada de múltiplas formas (diferentes agentes, diferentes parâmetros), como poderia uma procura local estocástica (e.g., Simulated Annealing) ser usada para encontrar uma configuração de equipa “suficientemente boa”? 
+
+O Simulated Annealing ajuda o Orquestrador a encontrar uma configuração de equipa que seja eficiente e equilibrada, sem ter de testar todas as combinações possíveis, aceitando temporariamente soluções piores para explorar melhor o espaço de configurações.
+
+
+5. Analise a complexidade de uma busca cega para encontrar a melhor combinação de 3 agentes a partir de um conjunto de 10 agentes disponíveis, onde a ordem importa. 
+
+    Para escolher 3 agentes de um conjunto de 10, considerando que a ordem importa, o número de sequências possíveis é dado por uma permutação: P ( 10 , 3 ) = 10 × 9 × 8 = 720
+ 	Portanto, uma busca cega teria de avaliar todas as 720 sequências para encontrar a melhor combinação.
+ 
+6. O vosso agente “Investigador” pode usar diferentes APIs de pesquisa (Google, Bing, etc.). Como poderia a Procura de Custo Uniforme (UCS) ser usada para encontrar a sequência de pesquisas mais barata para obter uma determinada informação, se cada API tiver um custo por chamada? 
+
+A procura de custo uniforme ajuda o “Investigador”, a selecionar a sequencia de APIs mais econômica, minimizando o custo das chamadas
+
+7. Discuta como uma heurística informada poderia acelerar a descoberta do melhor agente para uma tarefa, em comparação com uma busca cega que testaria todos os agentes sequencialmente. 
+
+	Uma heurística informada ajudaria a encontrar um agente mais rápido pois tal como o nome indica ele já tem mais ao menos ideia sobre qual agente é mais adequado para a tarefa, invés de experimentar todos como faria numa busca cega. Como testa primeiro agentes mais promissores, iria gastar menos tempo, energia e recursos.
